@@ -1,0 +1,26 @@
+model:
+  name: "BioAE"
+  group_count: 3
+  n_blk_per_group: 2
+  channel: 128
+  hidden_dim: 128
+  input_channel: 64
+  quantizer:
+    name: "Continuous"
+    nonneg_coeff: 1
+    activity_coeff: 1e-2
+data:
+  name: "Shapes3DDataModule"
+  data_path: "./datasets/Shapes3D"
+  img_size: 64
+  num_latents: 12
+  batch_size: 256
+  num_workers: 8
+train:
+  reconst_loss: "F.mse_loss"
+  max_steps: 100000
+  optimizer: "torch.optim.Adam"
+  vae_lr: 1e-3
+  vae_lr_iter: 50000
+  check_val_every_n_epoch: 1
+  seed: 1
